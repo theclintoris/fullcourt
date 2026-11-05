@@ -1,0 +1,8 @@
+{
+  "appId": "com.fullcourt.nba",
+  "appName": "FullCourt",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}

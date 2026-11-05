@@ -1,0 +1,655 @@
+/* ==========================================================================
+   FullCourt — league screens, smaller windows
+   ========================================================================== */
+
+@media (max-width: 1320px) {
+  .league-page {
+    padding: 29px 28px 50px;
+  }
+
+  .league-title {
+    font-size: clamp(39px, 4.9vw, 58px);
+  }
+
+  .topnav-item {
+    padding: 0 12px;
+    font-size: 9px;
+  }
+
+  .topnav-status {
+    font-size: 7.5px;
+  }
+
+  .daily-layout {
+    grid-template-columns: minmax(0, 1fr) 268px;
+  }
+
+  .daily-leader-row {
+    grid-template-columns: 22px 36px minmax(112px, 1.15fr) minmax(94px, 0.9fr) 76px 56px;
+    gap: 6px;
+  }
+
+  .era-slot-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .era-slots--dense {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 1120px) {
+  .app-body--league .main-panel {
+    overflow-x: hidden;
+  }
+
+  .league-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .league-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .daily-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .daily-rail {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .standings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .records-podium {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .record-podium-card--3 {
+    grid-column: 1 / -1;
+    min-height: 100px;
+  }
+
+  .team-records-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .era-slots,
+  .era-slots--dense {
+    grid-template-columns: 1fr;
+  }
+
+  .era-slot-stats {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .record-podium-copy h3 {
+    font-size: 23px;
+  }
+
+  .record-podium-card > strong {
+    font-size: 30px;
+  }
+
+  .stats-table-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+}
+
+@media (max-width: 960px) {
+  .topnav {
+    padding: 0 10px;
+  }
+
+  .topnav-status {
+    display: none;
+  }
+
+  .topnav-item {
+    padding: 0 10px;
+    font-size: 8.5px;
+  }
+
+  .league-page {
+    padding: 23px 19px 43px;
+  }
+
+  .league-title {
+    font-size: clamp(36px, 6.6vw, 51px);
+  }
+
+  .league-description {
+    font-size: 10.5px;
+  }
+
+  .league-header-action-stack {
+    flex-wrap: wrap;
+  }
+
+  .daily-feed-strip,
+  .standings-feed-strip {
+    margin-bottom: 11px;
+  }
+
+  .daily-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .daily-summary-card {
+    min-height: 118px;
+  }
+
+  .daily-leader-row {
+    grid-template-columns: 20px 34px minmax(95px, 1fr) 68px 52px;
+  }
+
+  .daily-line-detail {
+    display: none;
+  }
+
+  .daily-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .stats-toolbar-note {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .stats-table-wrap {
+    max-height: none;
+  }
+
+  .era-context-note {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .standings-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .standings-summary > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .standings-summary > div:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .records-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .records-search {
+    width: 100%;
+  }
+
+  .records-scope-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .records-snapshot {
+    text-align: left;
+  }
+
+  .sheet-stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .player-season-sheet {
+    width: min(560px, 96vw);
+  }
+
+  .standings-loading {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .topnav {
+    overflow: hidden;
+    padding: 0 6px;
+  }
+
+  .topnav-inner {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .topnav-item {
+    flex: 1 0 auto;
+    justify-content: center;
+    padding: 0 7px;
+    font-size: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .topnav-item svg {
+    display: none;
+  }
+
+  .league-page {
+    padding: 19px 13px 36px;
+  }
+
+  .league-title {
+    font-size: 34px;
+  }
+
+  .league-header {
+    margin-bottom: 16px;
+  }
+
+  .league-description {
+    margin-top: 8px;
+  }
+
+  .league-actions {
+    gap: 6px;
+  }
+
+  .league-header-action-stack {
+    width: 100%;
+  }
+
+  .date-pager {
+    flex: 1;
+  }
+
+  .date-pager-value {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .date-pager-today {
+    display: none;
+  }
+
+  .league-refresh-button {
+    padding: 0 9px;
+  }
+
+  .daily-feed-strip {
+    font-size: 7.5px;
+  }
+
+  .daily-updated {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .daily-summary-card {
+    min-height: 111px;
+    padding: 11px;
+  }
+
+  .daily-summary-value {
+    font-size: 32px;
+  }
+
+  .daily-summary-player strong {
+    font-size: 8.5px;
+  }
+
+  .daily-board {
+    padding: 13px 11px 8px;
+  }
+
+  .daily-board-head h2 {
+    font-size: 23px;
+  }
+
+  .daily-category {
+    min-width: 52px;
+    padding: 6px 7px 5px;
+  }
+
+  .daily-leader-row {
+    grid-template-columns: 18px 30px minmax(82px, 1fr) 50px;
+    gap: 6px;
+    min-height: 49px;
+    padding: 6px 2px;
+  }
+
+  .daily-game-state {
+    display: none;
+  }
+
+  .daily-value {
+    font-size: 19px;
+  }
+
+  .daily-player-face {
+    width: 28px;
+    height: 28px;
+  }
+
+  .daily-player-copy small {
+    display: none;
+  }
+
+  .daily-rail-card {
+    padding: 13px;
+  }
+
+  .standings-feed-strip {
+    gap: 6px;
+  }
+
+  .standings-legend {
+    display: none;
+  }
+
+  .standings-table {
+    min-width: 625px;
+  }
+
+  .standings-summary strong {
+    font-size: 19px;
+  }
+
+  .records-header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .records-header-mark,
+  .records-sync-button {
+    height: 34px;
+  }
+
+  .records-podium {
+    grid-template-columns: 1fr;
+  }
+
+  .record-podium-card--3 {
+    grid-column: auto;
+  }
+
+  .record-podium-card {
+    min-height: 118px;
+    padding: 12px;
+  }
+
+  .record-podium-copy h3 {
+    font-size: 23px;
+  }
+
+  .record-podium-card > strong {
+    font-size: 30px;
+  }
+
+  .team-records-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .records-scope-row {
+    margin-bottom: 11px;
+  }
+
+  .records-scope {
+    padding: 6px 7px;
+    font-size: 7.5px;
+  }
+
+  .records-categories {
+    gap: 0;
+  }
+
+  .record-category {
+    padding: 5px 6px;
+    font-size: 7px;
+  }
+
+  .era-quickstarts {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .era-reset {
+    margin-left: auto;
+    margin-top: -27px;
+  }
+
+  .era-slot-toolbar {
+    padding: 7px 9px;
+  }
+
+  .era-player-head {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 13px;
+  }
+
+  .era-player-head .team-logo {
+    margin-left: 0;
+  }
+
+  .era-change {
+    margin-left: auto;
+  }
+
+  .era-player-identity h2 {
+    max-width: 210px;
+    font-size: 24px;
+  }
+
+  .era-player-mark {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  .era-context {
+    margin: 0 13px;
+  }
+
+  .era-context > span {
+    font-size: 8px;
+  }
+
+  .era-slot-section {
+    padding: 10px 13px 0;
+  }
+
+  .era-slot-stats,
+  .era-slot-stats--compact {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .era-advanced-line {
+    gap: 10px;
+    margin: 10px 13px 12px;
+  }
+
+  .era-comparison-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .era-comparison-head > p {
+    max-width: none;
+    text-align: left;
+  }
+
+  .era-table {
+    min-width: 440px;
+  }
+
+  .era-table th,
+  .era-table td,
+  .era-table th[scope='row'] {
+    padding-right: 9px;
+    padding-left: 9px;
+  }
+
+  .player-season-sheet {
+    width: 100%;
+    max-width: none;
+  }
+
+  .sheet-hero {
+    min-height: 155px;
+    padding: 22px 17px 16px;
+  }
+
+  .sheet-hero h2 {
+    font-size: 40px;
+  }
+
+  .sheet-hero .player-avatar {
+    width: 88px !important;
+    height: 88px !important;
+  }
+
+  .sheet-body {
+    padding: 16px 17px 29px;
+  }
+
+  .sheet-stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .sheet-shooting > div {
+    padding: 7px;
+  }
+
+  .sheet-era-context {
+    align-items: flex-start;
+  }
+
+  .stats-mode-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .stats-search {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .stats-filter {
+    flex: 1;
+  }
+
+  .stats-filter select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .era-context-strip {
+    gap: 7px;
+  }
+
+  .era-context-note {
+    display: none;
+  }
+
+  .records-controls .stats-search {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .topnav-item {
+    padding: 0 5px;
+    font-size: 7.5px;
+  }
+
+  .topnav-item--active::after {
+    right: 5px;
+    left: 5px;
+  }
+
+  .league-title {
+    font-size: 31px;
+  }
+
+  .daily-summary-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .daily-summary-card {
+    min-height: 105px;
+  }
+
+  .daily-summary-value {
+    font-size: 29px;
+  }
+
+  .daily-layout {
+    gap: 10px;
+  }
+
+  .daily-leader-row {
+    grid-template-columns: 16px 28px minmax(68px, 1fr) 45px;
+  }
+
+  .daily-player-copy strong {
+    font-size: 9px;
+  }
+
+  .records-scopes {
+    gap: 0;
+  }
+
+  .records-scope {
+    padding: 5px 6px;
+  }
+
+  .era-slot-index {
+    font-size: 6.5px;
+  }
+
+  .era-slot-toolbar .season-select select {
+    max-width: 68px;
+  }
+
+  .era-player-identity h2 {
+    max-width: 160px;
+    font-size: 21px;
+  }
+
+  .era-player-mark {
+    display: none;
+  }
+
+  .era-player-head {
+    gap: 7px;
+  }
+
+  .era-player-head .team-logo {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .sheet-hero .player-avatar {
+    display: none;
+  }
+
+  .sheet-hero h2 {
+    font-size: 37px;
+  }
+}

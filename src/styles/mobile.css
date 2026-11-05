@@ -1,0 +1,376 @@
+/* Native Android shell additions. Desktop keeps the custom Windows chrome. */
+
+.fullcourt-native {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fullcourt-native .window-controls {
+  display: none;
+}
+
+.fullcourt-native .titlebar {
+  height: calc(var(--titlebar-height) + env(safe-area-inset-top));
+  flex-basis: calc(var(--titlebar-height) + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+}
+
+.fullcourt-native .app-shell {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.fullcourt-native .topnav {
+  flex: 0 0 auto;
+}
+
+.fullcourt-native .topnav-inner {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.fullcourt-native .topnav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.fullcourt-native .topnav-item {
+  flex: 0 0 auto;
+}
+
+.fullcourt-native .main-panel {
+  -webkit-overflow-scrolling: touch;
+}
+
+.fullcourt-native .mobile-date-nav {
+  display: flex;
+}
+
+.fullcourt-native .sidebar {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .fullcourt-native .titlebar {
+    padding-left: 12px;
+  }
+
+  .fullcourt-native .titlebar-meta {
+    gap: 8px;
+    padding-right: 10px;
+  }
+
+  .fullcourt-native .topnav-item {
+    padding-right: 9px;
+    padding-left: 9px;
+    font-size: 8.5px;
+  }
+
+  .fullcourt-native .page-header h1,
+  .fullcourt-native .league-title {
+    font-size: 38px;
+  }
+
+  .fullcourt-native .sidebar {
+    display: none;
+  }
+
+  .fullcourt-native .game-center {
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
+  }
+
+  .fullcourt-native .spotlight-matchup {
+    grid-template-columns: minmax(0, 1fr) 74px minmax(0, 1fr);
+  }
+
+  .fullcourt-native .spotlight-name {
+    font-size: 20px;
+  }
+
+  .fullcourt-native .spotlight-scoreline {
+    font-size: 38px;
+  }
+
+  .fullcourt-native .game-hero-scoreboard {
+    gap: 0;
+  }
+
+  .fullcourt-native .hero-team-name {
+    font-size: 19px;
+  }
+
+  .fullcourt-native .hero-scoreline {
+    font-size: 38px;
+  }
+
+  .fullcourt-native .stat-sort,
+  .fullcourt-native .stats-table {
+    touch-action: manipulation;
+  }
+
+  .fullcourt-native .detail-toolbar {
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  .fullcourt-native .detail-toolbar-right {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .fullcourt-native .detail-updated {
+    display: none;
+  }
+
+  .fullcourt-native .watch-button {
+    flex: 1;
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 9px;
+  }
+}
+
+.spotlight-mobile {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .fullcourt-native .spotlight-matchup {
+    display: none;
+  }
+
+  .fullcourt-native .spotlight-mobile {
+    display: flex;
+    width: 100%;
+    align-self: stretch;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin: 14px 0 2px;
+    padding: 2px 0;
+  }
+
+  .fullcourt-native .spotlight-mobile-team {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fullcourt-native .spotlight-mobile-team:nth-child(2) {
+    border-bottom: 0;
+  }
+
+  .fullcourt-native .spotlight-mobile-logo {
+    flex: 0 0 auto;
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .fullcourt-native .spotlight-mobile-copy {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .fullcourt-native .spotlight-mobile-copy .spotlight-name {
+    overflow: hidden;
+    font-size: 22px;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .fullcourt-native .spotlight-mobile-copy .spotlight-location {
+    font-size: 7px;
+  }
+
+  .fullcourt-native .spotlight-mobile-copy .spotlight-record {
+    font-size: 8px;
+  }
+
+  .fullcourt-native .spotlight-mobile-score {
+    flex: 0 0 58px;
+    align-self: center;
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .fullcourt-native .spotlight-mobile-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 8px;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .fullcourt-native .spotlight-top-meta {
+    min-width: 0;
+    max-width: 58%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .fullcourt-native .spotlight-top-meta > span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .fullcourt-native .spotlight-matchup {
+    grid-template-columns: minmax(0, 1fr) 86px minmax(0, 1fr);
+    gap: 0;
+    padding: 16px 0 12px;
+  }
+
+  .fullcourt-native .spotlight-team {
+    width: 100%;
+    align-items: center;
+    gap: 5px;
+    text-align: center;
+  }
+
+  .fullcourt-native .spotlight-team-copy {
+    align-items: center;
+  }
+
+  .fullcourt-native .spotlight-team--away {
+    flex-direction: column-reverse;
+  }
+
+  .fullcourt-native .spotlight-team--away .spotlight-team-copy {
+    order: 0;
+  }
+
+  .fullcourt-native .spotlight-logo {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .fullcourt-native .spotlight-name {
+    max-width: 100%;
+    font-size: 16px;
+    line-height: 1;
+    white-space: normal;
+  }
+
+  .fullcourt-native .spotlight-location {
+    font-size: 6.5px;
+  }
+
+  .fullcourt-native .spotlight-record {
+    font-size: 7px;
+  }
+
+  .fullcourt-native .spotlight-center {
+    width: 86px;
+    min-width: 0;
+  }
+
+  .fullcourt-native .spotlight-scoreline {
+    gap: 2px;
+    font-size: 32px;
+  }
+
+  .fullcourt-native .spotlight-score-divider {
+    display: none;
+  }
+
+  .fullcourt-native .spotlight-status {
+    margin-top: 6px;
+    font-size: 6.5px;
+  }
+
+  .fullcourt-native .spotlight-reason {
+    font-size: 7px;
+  }
+
+  .fullcourt-native .spotlight-game {
+    min-height: 250px;
+    padding: 15px 15px 0;
+  }
+
+  .fullcourt-native .spotlight-footer {
+    margin: 0 -15px;
+    padding: 9px 15px;
+  }
+
+  .fullcourt-native .spotlight-venue,
+  .fullcourt-native .spotlight-open {
+    font-size: 7.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fullcourt-native .titlebar-wordmark {
+    font-size: 18px;
+  }
+
+  .fullcourt-native .titlebar-live {
+    display: none;
+  }
+
+  .fullcourt-native .topnav-item {
+    padding-right: 7px;
+    padding-left: 7px;
+    font-size: 7.5px;
+  }
+
+  .fullcourt-native .league-page {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .fullcourt-native .page-header h1,
+  .fullcourt-native .league-title {
+    font-size: 32px;
+  }
+}
+
+/* A compact date pivot for the phone layout, where the sidebar is hidden. */
+.mobile-date-nav {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  margin: 12px 0 0;
+}
+
+.mobile-date-nav button {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--text-muted);
+  background: var(--panel);
+}
+
+.mobile-date-nav span {
+  min-width: 108px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+.mobile-date-nav .mobile-date-today {
+  width: auto;
+  padding: 0 9px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}

@@ -1,0 +1,94 @@
+{
+  "name": "fullcourt",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "description": "A live NBA game center and league stats desk for Windows and Android.",
+  "author": "FullCourt",
+  "license": "MIT",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "build": "vite build",
+    "start": "npm run build && electron .",
+    "app": "electron .",
+    "test": "node --test tests/*.test.mjs",
+    "installer": "npm run build && electron-builder --win nsis",
+    "portable": "npm run build && electron-builder --win portable",
+    "dist": "npm run build && electron-builder --win nsis portable",
+    "mobile:service": "node scripts/build-mobile-service.mjs",
+    "mobile:sync": "npm run build && npx cap copy android"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.6.10",
+    "@capacitor/cli": "^7.6.10",
+    "@capacitor/core": "^7.6.10",
+    "@fontsource/barlow-condensed": "5.3.0",
+    "@fontsource/dm-sans": "5.3.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "electron": "45.2.3",
+    "electron-builder": "26.18.0",
+    "lucide-react": "1.68.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "vite": "7.3.7"
+  },
+  "build": {
+    "appId": "com.fullcourt.nba",
+    "productName": "FullCourt",
+    "asar": true,
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "src/data/records.json",
+      "src/data/league-fallback.json",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "build/icon.ico",
+        "to": "icon.ico"
+      },
+      {
+        "from": "build/icon.png",
+        "to": "icon.png"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "FullCourt",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "artifactName": "FullCourt-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "FullCourt-Portable-${version}.${ext}"
+    }
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  }
+}
