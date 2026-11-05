@@ -2,6 +2,17 @@ const DATE_KEY_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 export const DASH = '—';
 
 export const NBA_TIME_ZONE = 'America/New_York';
+export const NZ_TIME_ZONE = 'Pacific/Auckland';
+
+const nzTimeFormatter = new Intl.DateTimeFormat('en-US', {
+  hour: 'numeric',
+  minute: '2-digit',
+  timeZone: NZ_TIME_ZONE,
+});
+const nzZoneFormatter = new Intl.DateTimeFormat('en-NZ', {
+  timeZone: NZ_TIME_ZONE,
+  timeZoneName: 'short',
+});
 
 const weekdayShort = new Intl.DateTimeFormat('en-US', {
   weekday: 'short',
@@ -143,20 +154,13 @@ export function isGameLive(game) {
 }
 
 export function formatTipTime(game) {
-  const detail = String(game?.status?.detail || '');
-  const timeMatch = detail.match(/\b(\d{1,2}:\d{2}\s*(?:AM|PM))\b/i);
-  if (timeMatch) {
-    const zoneMatch = detail.match(/\b(ET|EST|EDT|CT|CST|CDT|MT|MST|MDT|PT|PST|PDT)\b/);
-    return `${timeMatch[1].toUpperCase()}${zoneMatch ? ` ${zoneMatch[1].toUpperCase()}` : ''}`;
-  }
   const date = new Date(game?.date || '');
   if (Number.isNaN(date.getTime())) return 'Tip time TBD';
-  const time = new Intl.DateTimeFormat('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    timeZone: 'America/New_York',
-  }).format(date);
-  return `${time} ET`;
+  const time = nzTimeFormatter.format(date);
+  const zonePart = nzZoneFormatter
+    .formatToParts(date)
+    .find((part) => part.type === 'timeZoneName')?.value;
+  return `${time} ${zonePart || 'NZT'}`;
 }
 
 export function statusLabel(game) {

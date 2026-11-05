@@ -1,9 +1,11 @@
-# FullCourt 1.2.0 — Live Stats, Sorting + League Pass
+# FullCourt 1.2.1 — New Zealand Tip Times
 
 FullCourt is a desktop NBA command center: live scores, full box scores, player and team stats, standings, record books, and era-adjusted comparisons.
 
-## Highlights in 1.2.0
+## Highlights in 1.2.1
 
+- **New Zealand tip times** — every upcoming game now shows local New Zealand time with the correct `NZDT`/`NZST` label. Game dates follow the NBA schedule.
+- **Clearer upcoming games** — upcoming-game labels now say “Tip-off” instead of assuming the game is tonight.
 - **Live daily leaders** — points, rebounds, assists, steals, blocks, threes, free throws, field-goal percentage, fantasy score, and turnovers, built from the day's box scores.
 - **Fully sortable stats** — every displayed team and player column can be sorted, with click-again-to-reverse behavior.
 - **Fully sortable standings** — seed, team, W/L, PCT, GB, PPG, OPP, DIFF, streak, and last ten. Each conference sorts independently.
@@ -17,9 +19,9 @@ FullCourt is a desktop NBA command center: live scores, full box scores, player 
 
 | Style | File |
 | --- | --- |
-| Windows installer | `FullCourt-Setup-1.2.0.exe` |
-| Windows portable EXE | `FullCourt-Portable-1.2.0.exe` |
-| Windows portable folder ZIP | `FullCourt-1.2.0-win-x64.zip` |
+| Windows installer | `FullCourt-Setup-1.2.1.exe` |
+| Windows portable EXE | `FullCourt-Portable-1.2.1.exe` |
+| Windows portable folder ZIP | `FullCourt-1.2.1-win-x64.zip` |
 
 All Windows builds are unsigned; SmartScreen may warn on first launch. The portable EXE needs no installation. The ZIP is the simplest fallback: extract the folder and run `FullCourt.exe`.
 

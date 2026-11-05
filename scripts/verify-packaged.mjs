@@ -4,9 +4,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const exe = path.join(root, 'release', 'win-unpacked', 'FullCourt.exe');
+const exe = process.env.FULLCOURT_EXE || path.join(root, 'release', 'win-unpacked', 'FullCourt.exe');
 const userData = path.join(root, '.electron-packaged-test');
-const shot = path.join(root, 'screenshots', '42-packaged-1.1.1.png');
+const shot = process.env.FULLCOURT_SHOT || path.join(root, 'screenshots', '42-packaged-1.1.1.png');
 const port = 9333;
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -93,6 +93,7 @@ async function main() {
           live: Boolean(document.querySelector('.live-dot')),
           nav: document.querySelector('.topnav')?.innerText.replace(/\\n+/g, ' ').trim() || '',
           section: document.querySelector('.titlebar-section')?.textContent.trim() || '',
+          tip: document.querySelector('.spotlight-tip-time')?.textContent.trim() || '',
           error: document.querySelector('.state-panel--error')?.innerText || ''
         }))()`,
         returnByValue: true,

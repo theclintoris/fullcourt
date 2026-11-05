@@ -159,7 +159,7 @@ function SpotlightGame({ game, onOpen }) {
             </span>
           )}
           <span className="spotlight-status">
-            {phase === 'upcoming' ? 'Tonight' : statusText}
+            {statusText}
           </span>
           <span className="spotlight-reason">{spotlightReason(game)}</span>
         </span>
@@ -198,7 +198,7 @@ function SpotlightGame({ game, onOpen }) {
           </span>
         </span>
         <span className="spotlight-mobile-meta">
-          <span>{phase === 'upcoming' ? `Tonight · ${formatTipTime(game)}` : statusText}</span>
+          <span>{phase === 'upcoming' ? `Tip-off · ${formatTipTime(game)}` : statusText}</span>
           <span>{spotlightReason(game)}</span>
         </span>
       </span>
@@ -389,6 +389,8 @@ export default function GameCenter({
             <span>{liveCount ? `${liveCount} live now` : 'No games in progress'}</span>
             <span className="subline-dot" aria-hidden="true" />
             <span>{seasonLabel} {seasonType}</span>
+            <span className="subline-dot" aria-hidden="true" />
+            <span>Tip times in NZ</span>
           </p>
         </div>
         <div className="page-header-actions">

@@ -268,7 +268,7 @@ export default function Sidebar({
             <CalendarDays size={15} />
             <span className="date-display-copy">
               <strong>{formatSidebarDate(dateKey)}</strong>
-              <span>{dateKey === today ? 'Today' : 'Game night'}</span>
+              <span>{dateKey === today ? 'NBA today' : 'Game night'}</span>
             </span>
           </button>
           <button
@@ -291,7 +291,7 @@ export default function Sidebar({
         {dateKey !== today ? (
           <button type="button" className="jump-today" onClick={() => selectDate(today)}>
             <Radio size={12} />
-            Jump to today
+            Jump to NBA today
           </button>
         ) : null}
 
