@@ -40,7 +40,7 @@ function createWindow() {
     minHeight: 700,
     show: false,
     frame: false,
-    backgroundColor: '#080a0f',
+    backgroundColor: '#0c1017',
     title: 'FullCourt',
     icon: getIconPath(),
     hasShadow: true,

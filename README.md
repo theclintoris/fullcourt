@@ -35,6 +35,8 @@ The builds are unsigned, so Windows SmartScreen may show a warning on first laun
 - **Records** — single-game, single-season, career, playoff, and team record books with category filters and search. Regular-season season/career tables are bundled through November 2026; on launch FullCourt checks Basketball Reference for fresh all-time leaderboards and keeps the last good snapshot with a lossless merge. If the source is rate-limited, the app clearly labels the cached fallback and retries on a later launch.
 - **Era Lab** — put two to four player-seasons side by side. Compare raw per-game production, per-100 possession rates, advanced metrics, and transparent era-adjusted scoring and efficiency indexes.
 
+Under **Records → Teams → Franchise records**, browse all 30 teams by current or former name. Each profile includes regular-season and playoff win–loss totals, title seasons, single-game and single-season records, streaks, and every completed season's results and per-game stats. The current season appears separately when ESPN standings are available.
+
 Advanced game metrics are derived locally. Era adjustments are experimental and clearly labeled; they are context, not a claim about who would win.
 
 ## Screens
@@ -43,9 +45,9 @@ Advanced game metrics are derived locally. Era adjustments are experimental and 
 | --- | --- |
 | ![Daily leaders](screenshots/12-daily-leaders.png) | ![Era Lab](screenshots/18-era-lab.png) |
 
-| Standings | Records |
+| Standings | Franchise records |
 | --- | --- |
-| ![Standings](screenshots/16-standings.png) | ![Records](screenshots/17-records.png) |
+| ![Standings](screenshots/16-standings.png) | ![Franchise records](screenshots/23-records-team.png) |
 
 | Android — Scores | Android — Daily Leaders |
 | --- | --- |
@@ -127,7 +129,9 @@ Historical team/player tables and league context:
 Record book:
 
 - a current bundled Basketball Reference baseline (regular-season season and career lists through 2026-11-01, scoring through March 2026) plus a launch-time refresh of the full all-time leaderboards
-- curated team records
+- curated league-wide team records
+- a franchise archive through 2025–26, including BAA and ABA seasons where applicable. Results come from [Basketball Reference](https://www.basketball-reference.com/teams/) and [StatMuse](https://www.statmuse.com/nba/team/toronto-raptors-51/history), with per-game stats from the [Basketball Reference extract on Kaggle](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats). Rebuild the archive with [the franchise records script](scripts/build-franchise-records.py).
+- franchise game records and postseason win–loss totals from [FiveThirtyEight's NBA Elo archive](https://github.com/fivethirtyeight/data/tree/master/nba-elo), [Eoin Moore's game logs](https://www.kaggle.com/datasets/eoinamoore/historical-nba-data-and-player-box-scores), and ESPN schedules. The build verifies each regular-season game log against the franchise's season record.
 
 The renderer has no network access. HTML runs behind a strict CSP, `connect-src` is disabled, and all live requests pass through context-isolated preload IPC. Responses are cached in the main process with stale-cache fallback when a feed is unavailable. Basketball Reference rate limits are respected with a serial request queue. On Android, the same service bundle runs inside the app and routes requests through Capacitor's native HTTP bridge; no browser CORS permission is used.
 

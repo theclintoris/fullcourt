@@ -15,7 +15,7 @@
   height: 46px;
   padding: 0 16px 0 20px;
   border-bottom: 1px solid var(--line);
-  background: rgba(9, 12, 17, 0.96);
+  background: #101722;
   user-select: none;
 }
 
@@ -25,6 +25,7 @@
   min-width: 0;
   overflow-x: auto;
   scrollbar-width: none;
+  gap: 3px;
 }
 
 .topnav-inner::-webkit-scrollbar {
@@ -36,13 +37,15 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  height: 46px;
+  height: 34px;
+  align-self: center;
   padding: 0 15px;
-  color: var(--text-dim);
-  font-size: 9.5px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+  letter-spacing: 0.015em;
   white-space: nowrap;
   transition: color 0.16s ease, background 0.16s ease;
 }
@@ -62,24 +65,17 @@
 }
 
 .topnav-item--active {
-  color: var(--text);
-  background: linear-gradient(180deg, rgba(242, 115, 44, 0.08), transparent 75%);
-}
-
-.topnav-item--active::after {
-  content: '';
-  position: absolute;
-  right: 11px;
-  bottom: 0;
-  left: 11px;
-  height: 2px;
-  border-radius: 2px 2px 0 0;
-  background: var(--orange);
-  box-shadow: 0 0 14px rgba(242, 115, 44, 0.45);
+  border-color: var(--line-orange);
+  color: var(--orange-light);
+  background: var(--orange-wash);
 }
 
 .topnav-item--active svg {
   color: var(--orange);
+}
+
+.topnav-item:focus-visible {
+  outline-offset: -2px;
 }
 
 .topnav-status {

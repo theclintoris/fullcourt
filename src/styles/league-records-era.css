@@ -2,40 +2,48 @@
    FullCourt — record book and Era Lab
    ========================================================================== */
 
-.records-header-mark {
-  display: inline-flex;
-  height: 38px;
-  align-items: center;
-  gap: 7px;
-  padding: 0 12px;
-  border: 1px solid var(--line-orange);
-  border-radius: 8px;
-  background: var(--orange-wash);
-  color: var(--orange-light);
-  font-size: 8.5px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.records-masthead {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(20px, 3vw, 34px);
+  margin-bottom: 14px;
+  border: 1px solid var(--line-strong);
+  border-top-color: var(--line-orange);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(ellipse at top right, #523125 0%, transparent 65%),
+    linear-gradient(120deg, var(--panel-raised), var(--bg-soft));
 }
 
-.records-header-mark svg {
-  color: var(--orange);
+.records-masthead::before {
+  position: absolute;
+  inset: -116% -12% -116% auto;
+  aspect-ratio: 1;
+  border: 1px solid #faad7540;
+  border-radius: 50%;
+  box-shadow: 0 0 0 28px #faad7509, 0 0 0 57px #faad7511;
+  content: '';
+}
+
+.records-masthead .league-header {
+  position: relative;
+  margin: 0;
+}
+
+.records-masthead .league-title {
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 800;
+}
+
+.records-masthead .league-description {
+  color: var(--text-soft);
+  font-size: 13px;
 }
 
 .records-header-actions {
   display: flex;
   align-items: center;
   gap: 9px;
-}
-
-.records-header-mark--live {
-  border-color: rgba(96, 211, 161, 0.34);
-  background: var(--green-wash);
-  color: var(--green);
-}
-
-.records-header-mark--live svg {
-  color: var(--green);
 }
 
 .records-sync-button {
@@ -48,10 +56,9 @@
   border-radius: 8px;
   background: var(--panel);
   color: var(--text-dim);
-  font-size: 8.5px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
@@ -81,7 +88,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 10px;
   margin-bottom: 15px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
@@ -96,11 +103,11 @@
 .records-scope,
 .record-subtab {
   position: relative;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border: 1px solid transparent;
   border-radius: 6px;
   color: var(--text-muted);
-  font-size: 8.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.02em;
   transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
@@ -120,8 +127,8 @@
 }
 
 .records-snapshot {
-  color: var(--text-faint);
-  font-size: 7.5px;
+  color: var(--text-muted);
+  font-size: 11px;
   letter-spacing: 0.04em;
   text-align: right;
   white-space: nowrap;
@@ -142,11 +149,11 @@
 }
 
 .record-category {
-  padding: 5px 8px;
+  padding: 6px 9px;
   border: 1px solid transparent;
   border-radius: 5px;
   color: var(--text-dim);
-  font-size: 7.5px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -164,7 +171,7 @@
 
 .records-search {
   min-width: 195px;
-  height: 32px;
+  height: 36px;
 }
 
 .records-playoff-types {
@@ -181,7 +188,7 @@
 .records-podium {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  gap: 12px;
   margin-bottom: 13px;
 }
 
@@ -193,7 +200,7 @@
   overflow: hidden;
   padding: 14px 15px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background:
     radial-gradient(170px 120px at 90% 0, rgba(242, 115, 44, 0.12), transparent 70%),
     var(--panel);
@@ -208,13 +215,17 @@
 
 .record-podium-rank {
   position: absolute;
-  top: 8px;
-  right: 12px;
-  color: rgba(255, 255, 255, 0.075);
+  top: 12px;
+  left: 15px;
+  color: var(--text-muted);
   font-family: var(--font-display);
-  font-size: 53px;
+  font-size: 24px;
   font-weight: 800;
   line-height: 1;
+}
+
+.record-podium-card--1 .record-podium-rank {
+  color: var(--orange-light);
 }
 
 .record-podium-copy {
@@ -226,7 +237,7 @@
 
 .record-podium-category {
   color: var(--orange);
-  font-size: 6.5px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -248,7 +259,7 @@
 .record-podium-copy p {
   margin-top: 4px;
   color: var(--text-muted);
-  font-size: 7.5px;
+  font-size: 10px;
 }
 
 .record-podium-card > strong {
@@ -261,14 +272,6 @@
   line-height: 0.9;
 }
 
-.record-podium-crown {
-  position: absolute;
-  top: 13px;
-  left: 15px;
-  color: var(--orange);
-  opacity: 0.8;
-}
-
 .records-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
@@ -279,14 +282,14 @@
 .records-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 9.5px;
+  font-size: 12px;
 }
 
 .records-table th {
-  padding: 8px 10px;
+  padding: 9px 12px;
   border-bottom: 1px solid var(--line-strong);
   color: var(--text-faint);
-  font-size: 6.5px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.09em;
   text-align: left;
@@ -299,7 +302,7 @@
 }
 
 .records-table td {
-  padding: 7px 10px;
+  padding: 8px 12px;
   border-bottom: 1px solid var(--line);
   color: var(--text-muted);
 }
@@ -334,7 +337,7 @@
 
 .records-detail {
   color: var(--text-dim) !important;
-  font-size: 8.5px;
+  font-size: 11px;
   text-align: right;
 }
 
@@ -359,27 +362,11 @@
 }
 
 .team-record-card {
-  position: relative;
   min-height: 138px;
-  padding: 14px;
+  padding: 17px;
   border: 1px solid var(--line);
   border-radius: 9px;
   background: var(--panel);
-  transition: border-color 0.16s ease, transform 0.16s ease;
-}
-
-.team-record-card:hover {
-  border-color: var(--line-orange);
-  transform: translateY(-2px);
-}
-
-.team-record-rank {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  color: var(--text-faint);
-  font-family: var(--font-display);
-  font-size: 21px;
 }
 
 .team-record-card > strong {
@@ -395,21 +382,14 @@
 .team-record-card h3 {
   margin-top: 3px;
   color: var(--text-soft);
-  font-size: 10.5px;
+  font-size: 13px;
   font-weight: 600;
 }
 
 .team-record-card > p:last-of-type {
   margin-top: 5px;
   color: var(--text-dim);
-  font-size: 7.5px;
-}
-
-.team-record-card > svg {
-  position: absolute;
-  right: 13px;
-  bottom: 13px;
-  color: var(--text-faint);
+  font-size: 11px;
 }
 
 /* ---------- Era Lab ------------------------------------------------------- */
