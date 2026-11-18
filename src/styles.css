@@ -4,12 +4,12 @@
    ========================================================================== */
 
 :root {
-  --bg: #080a0e;
-  --bg-soft: #0b0e14;
-  --panel: #0f131a;
-  --panel-raised: #141922;
-  --panel-bright: #1a202b;
-  --panel-hover: #1d2430;
+  --bg: #0c1017;
+  --bg-soft: #101620;
+  --panel: #141b26;
+  --panel-raised: #192231;
+  --panel-bright: #222d3d;
+  --panel-hover: #263345;
 
   --line: rgba(255, 255, 255, 0.075);
   --line-strong: rgba(255, 255, 255, 0.135);
@@ -17,9 +17,9 @@
 
   --text: #f4efe8;
   --text-soft: #cdc9c2;
-  --text-muted: #9ba1ad;
-  --text-dim: #6b7280;
-  --text-faint: #4f5560;
+  --text-muted: #aeb9ca;
+  --text-dim: #96a2b5;
+  --text-faint: #78869b;
 
   --orange: #f2732c;
   --orange-light: #ff8f4d;
@@ -71,8 +71,8 @@ body {
   line-height: 1.5;
   color: var(--text);
   background:
-    radial-gradient(1100px 700px at 82% -14%, rgba(242, 115, 44, 0.08), transparent 62%),
-    radial-gradient(900px 600px at 4% 108%, rgba(74, 107, 158, 0.07), transparent 60%),
+    radial-gradient(1100px 700px at 82% -14%, rgba(242, 115, 44, 0.06), transparent 62%),
+    radial-gradient(1100px 740px at 6% 55%, rgba(74, 107, 158, 0.11), transparent 68%),
     var(--bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -170,7 +170,7 @@ p {
   height: var(--titlebar-height);
   padding-left: 18px;
   border-bottom: 1px solid var(--line);
-  background: rgba(8, 10, 14, 0.92);
+  background: #0b1018;
   backdrop-filter: blur(20px);
   user-select: none;
   -webkit-app-region: drag;
@@ -1342,7 +1342,7 @@ p {
   margin-top: 5px;
   font-family: var(--font-display);
   font-size: clamp(40px, 4.2vw, 58px);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 0.94;
   letter-spacing: -0.005em;
   color: var(--text);
@@ -1444,7 +1444,7 @@ p {
   background:
     radial-gradient(700px 380px at 5% -30%, color-mix(in srgb, var(--away-color, var(--orange)) 22%, transparent), transparent 68%),
     radial-gradient(700px 380px at 95% -25%, color-mix(in srgb, var(--home-color, var(--orange)) 22%, transparent), transparent 68%),
-    linear-gradient(135deg, #171c25 0%, #0e1219 46%, #0b0e13 100%);
+    linear-gradient(135deg, #202c3e 0%, #141c2a 46%, #111822 100%);
   box-shadow: var(--shadow-panel);
   transition: border-color 0.25s ease, transform 0.3s var(--ease), box-shadow 0.3s ease;
 }
@@ -1477,7 +1477,8 @@ p {
   inset: 0;
   pointer-events: none;
   background:
-    repeating-linear-gradient(115deg, transparent 0 52px, rgba(255, 255, 255, 0.023) 52px 53px),
+    radial-gradient(circle at 50% 50%, transparent 0 108px, rgba(255, 255, 255, 0.055) 109px 110px, transparent 111px),
+    linear-gradient(90deg, transparent calc(50% - 0.5px), rgba(255, 255, 255, 0.055) 50%, transparent calc(50% + 0.5px)),
     radial-gradient(circle at 50% 120%, rgba(0, 0, 0, 0.4), transparent 55%);
   opacity: 0.8;
 }

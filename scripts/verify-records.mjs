@@ -90,7 +90,7 @@ async function main() {
           podium: [...document.querySelectorAll('.record-podium-card')].map((node) => node.innerText.replace(/\\n+/g, ' | ').trim()),
           snapshot: document.querySelector('.records-snapshot')?.innerText.trim() || '',
           note: document.querySelector('.league-source-note')?.innerText.replace(/\\n+/g, ' ').trim() || '',
-          syncBadge: document.querySelector('.records-header-mark')?.innerText.trim() || '',
+          syncButton: document.querySelector('.records-sync-button')?.innerText.trim() || '',
           syncMessage: document.querySelector('.records-sync-message')?.innerText.replace(/\\n+/g, ' ').trim() || '',
           error: document.querySelector('.state-panel--error')?.innerText || ''
         }))()`,

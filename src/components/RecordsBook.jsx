@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { ArrowUpRight, Crown, RefreshCw, Search, Trophy } from 'lucide-react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
+import { RefreshCw, Search, Trophy } from 'lucide-react';
 import bundledRecords from '../data/records.json';
 import {
   fetchRecords,
@@ -9,14 +9,16 @@ import {
   refreshRecords,
 } from '../lib/api.js';
 import { LeagueHeader, SourceNote } from './LeagueChrome.jsx';
-import { EmptyState } from './ui.jsx';
+import { EmptyState, LoadingLabel } from './ui.jsx';
 
-const PLAYER_SCOPES = [
+const FranchiseRecords = lazy(() => import('./FranchiseRecords.jsx'));
+
+const RECORD_SCOPES = [
   { id: 'singleGame', label: 'Single game' },
   { id: 'singleSeason', label: 'Single season' },
   { id: 'career', label: 'Career' },
   { id: 'playoffs', label: 'Playoffs' },
-  { id: 'team', label: 'Team' },
+  { id: 'team', label: 'Teams' },
 ];
 
 const PLAYOFF_TYPES = [
@@ -60,17 +62,16 @@ function recordDetail(scope, entry) {
 
 function PodiumCard({ entry, index, scope, categoryLabel }) {
   if (!entry) return null;
-  const medal = ['Ⅰ', 'Ⅱ', 'Ⅲ'][index] || '';
+  const detail = recordDetail(scope, entry);
   return (
     <article className={`record-podium-card record-podium-card--${index + 1}`}>
-      <span className="record-podium-rank">{medal}</span>
+      <span className="record-podium-rank">#{entry.rank}</span>
       <div className="record-podium-copy">
         <span className="record-podium-category">{categoryLabel}</span>
         <h3>{entry.player}</h3>
-        <p>{recordDetail(scope, entry) || 'All-time leaderboard'}</p>
+        {detail ? <p>{detail}</p> : null}
       </div>
       <strong>{entry.value}</strong>
-      <Crown size={16} className="record-podium-crown" />
     </article>
   );
 }
@@ -108,6 +109,7 @@ function PlayerRecords({ records, scope, category, onCategory, search, setSearch
               <button
                 type="button"
                 key={id}
+                aria-pressed={category === id}
                 className={`record-category ${category === id ? 'record-category--active' : ''}`}
                 onClick={() => onCategory(id)}
               >
@@ -120,6 +122,7 @@ function PlayerRecords({ records, scope, category, onCategory, search, setSearch
           <Search size={15} />
           <input
             type="search"
+            aria-label="Search player records"
             placeholder="Search the record book"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
@@ -133,6 +136,7 @@ function PlayerRecords({ records, scope, category, onCategory, search, setSearch
             <button
               type="button"
               key={type.id}
+              aria-pressed={playoffType === type.id}
               className={`record-subtab ${playoffType === type.id ? 'record-subtab--active' : ''}`}
               onClick={() => setPlayoffType(type.id)}
             >
@@ -195,7 +199,7 @@ function PlayerRecords({ records, scope, category, onCategory, search, setSearch
   );
 }
 
-function TeamRecords({ records, search, setSearch }) {
+function LeagueTeamRecords({ records, search, setSearch }) {
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();
     if (!query) return records.team || [];
@@ -207,15 +211,13 @@ function TeamRecords({ records, search, setSearch }) {
   return (
     <>
       <div className="records-controls">
-        <div>
-          <p className="league-kicker">Franchise marks</p>
-          <h2 className="records-subtitle">The team record book</h2>
-        </div>
+        <h2 className="records-subtitle">League-wide team records</h2>
         <label className="stats-search records-search">
           <Search size={15} />
           <input
             type="search"
-            placeholder="Search team records"
+            aria-label="Search league-wide team records"
+            placeholder="Search league records"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
@@ -224,12 +226,10 @@ function TeamRecords({ records, search, setSearch }) {
       <div className="team-records-grid">
         {filtered.map((entry) => (
           <article className="team-record-card" key={`${entry.category}-${entry.holder}`}>
-            <span className="team-record-rank">{String(entry.rank).padStart(2, '0')}</span>
             <p className="league-kicker">{entry.category}</p>
             <strong>{entry.value}</strong>
             <h3>{entry.holder}</h3>
             <p>{entry.detail}</p>
-            <ArrowUpRight size={15} />
           </article>
         ))}
       </div>
@@ -244,6 +244,8 @@ export default function RecordsBook() {
   const [scope, setScope] = useState('singleGame');
   const [category, setCategory] = useState('PTS');
   const [search, setSearch] = useState('');
+  const [teamView, setTeamView] = useState('franchise');
+  const [franchiseId, setFranchiseId] = useState('ATL');
   const [book, setBook] = useState(bundledRecords);
   const [sync, setSync] = useState({
     checking: false,
@@ -324,47 +326,26 @@ export default function RecordsBook() {
   const isLive = book.mode === 'live';
   const updated = formatUpdated(sync.lastUpdated || book.generatedAt);
   const archiveThrough = book.updatedThrough || book.snapshot || '2023-24';
+  const isTeamScope = scope === 'team';
   const freshness = isLive
     ? `Auto-synced${updated ? ` ${updated}` : ''}`
-    : `Bundled archive · regular season through ${archiveThrough}`;
-  const description = isLive
-    ? 'Single-game explosions, season-long peaks, playoff legend and career mounts. Rebuilt from Basketball Reference all-time leaderboards whenever FullCourt checks for fresh data. Team records are curated.'
-    : `Single-game explosions, season-long peaks, playoff legend and career mounts. Regular-season lists are current through ${archiveThrough}; FullCourt checks for a fresher leaderboard snapshot on every launch.`;
+    : `Bundled player archive · ${archiveThrough}`;
 
   return (
     <div className="league-page records-page">
-      <LeagueHeader
-        eyebrow="NBA · THE RECORD BOOK"
-        title="History, in order"
-        description={description}
-        actions={
-          <div className="records-header-actions">
-            {canSync ? (
-              <button
-                type="button"
-                className="records-sync-button"
-                onClick={handleSync}
-                disabled={sync.busy || sync.checking}
-              >
-                <RefreshCw size={15} className={sync.busy || sync.checking ? 'spin' : ''} />
-                {sync.busy ? 'Syncing' : sync.checking ? 'Checking' : 'Refresh data'}
-              </button>
-            ) : null}
-            <div className={`records-header-mark ${isLive ? 'records-header-mark--live' : ''}`}>
-              <Trophy size={22} />
-              <span>{isLive ? 'Auto-synced' : 'Archive'}</span>
-            </div>
-          </div>
-        }
-      />
+      <div className="records-masthead">
+        <LeagueHeader
+          title="NBA Record Book"
+          description="All-time player leaderboards, league records and complete franchise season histories."
+        />
+      </div>
 
       <div className="records-scope-row">
-        <div className="records-scopes" role="tablist" aria-label="Record scope">
-          {PLAYER_SCOPES.map((item) => (
+        <div className="records-scopes" role="group" aria-label="Record scope">
+          {RECORD_SCOPES.map((item) => (
             <button
               type="button"
-              role="tab"
-              aria-selected={scope === item.id}
+              aria-pressed={scope === item.id}
               key={item.id}
               className={`records-scope ${scope === item.id ? 'records-scope--active' : ''}`}
               onClick={() => handleScope(item.id)}
@@ -373,38 +354,65 @@ export default function RecordsBook() {
             </button>
           ))}
         </div>
-        <span className="records-snapshot" aria-live="polite">
-          {freshness} · {book.source || 'Basketball Reference via Kaggle'}
-        </span>
+        {!isTeamScope ? (
+          <div className="records-header-actions">
+            <span className="records-snapshot" aria-live="polite">{freshness}</span>
+            {canSync ? (
+              <button
+                type="button"
+                className="records-sync-button"
+                onClick={handleSync}
+                disabled={sync.busy || sync.checking}
+              >
+                <RefreshCw size={14} aria-hidden="true" className={sync.busy || sync.checking ? 'spin' : ''} />
+                {sync.busy ? 'Syncing' : sync.checking ? 'Checking' : 'Refresh players'}
+              </button>
+            ) : null}
+          </div>
+        ) : null}
       </div>
 
-      {sync.checking && !sync.busy ? (
-        <p className="records-sync-message">Checking Basketball Reference for fresh leaderboards…</p>
-      ) : null}
-      {sync.error ? (
+      {!isTeamScope && sync.error ? (
         <p className="records-sync-message records-sync-message--error" role="status">
-          Fresh data unavailable: {sync.error}
+          {sync.error}
         </p>
       ) : null}
 
-      {scope === 'team' ? (
-        <TeamRecords records={book} search={search} setSearch={setSearch} />
+      {isTeamScope ? (
+        <>
+          <div className="records-team-views" role="group" aria-label="Team records view">
+            <button type="button" aria-pressed={teamView === 'franchise'} onClick={() => setTeamView('franchise')}>
+              Franchise records
+            </button>
+            <button type="button" aria-pressed={teamView === 'league'} onClick={() => setTeamView('league')}>
+              League-wide records
+            </button>
+          </div>
+          {teamView === 'franchise' ? (
+            <Suspense fallback={<LoadingLabel>Loading franchise records…</LoadingLabel>}>
+              <FranchiseRecords selectedId={franchiseId} onSelect={setFranchiseId} />
+            </Suspense>
+          ) : (
+            <LeagueTeamRecords records={book} search={search} setSearch={setSearch} />
+          )}
+        </>
       ) : (
-        <PlayerRecords
-          records={book}
-          scope={scope}
-          category={category}
-          onCategory={handleCategory}
-          search={search}
-          setSearch={setSearch}
-        />
+        <>
+          <PlayerRecords
+            records={book}
+            scope={scope}
+            category={category}
+            onCategory={handleCategory}
+            search={search}
+            setSearch={setSearch}
+          />
+          <SourceNote>
+            {isLive
+              ? 'All-time player leaderboards are refreshed from Basketball Reference.'
+              : `Regular-season season and career player lists are current through ${archiveThrough}. Playoff lists use the 2023-24 archive, and single-game scoring includes March 2026.`}
+          </SourceNote>
+        </>
       )}
-
-      <SourceNote>
-        {isLive
-          ? `All-time leaderboards are refreshed from Basketball Reference. Team records are curated. Records are facts, not projections. Values are regular-season unless the Playoffs tab is selected.`
-          : `Regular-season season and career lists were rebuilt from Basketball Reference historical data through ${archiveThrough}; playoff lists remain the archived 2023-24 snapshot, and single-game scoring includes March 2026. FullCourt retries the full live leaderboard sync on future launches when Basketball Reference is available. Team records are curated. Values are regular-season unless the Playoffs tab is selected.`}
-      </SourceNote>
     </div>
   );
 }

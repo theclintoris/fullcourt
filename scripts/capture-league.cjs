@@ -371,11 +371,11 @@ async function main() {
   await win.webContents.executeJavaScript(`
     (() => {
       const scope = [...document.querySelectorAll('.records-scope')]
-        .find((node) => node.textContent.trim().toLowerCase() === 'team');
+        .find((node) => node.textContent.trim().toLowerCase() === 'teams');
       if (scope) scope.click();
     })();
   `, true);
-  await waitForSafe(win, '.team-record-card', 5000);
+  await waitForSafe(win, '.franchise-overview', 5000);
   await capture(win, '23-records-team');
 
   await openNav(win, 'Era Lab', '.era-page');

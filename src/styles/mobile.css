@@ -58,9 +58,8 @@
   }
 
   .fullcourt-native .topnav-item {
-    padding-right: 9px;
-    padding-left: 9px;
-    font-size: 8.5px;
+    padding-right: 7px;
+    padding-left: 7px;
   }
 
   .fullcourt-native .page-header h1,
@@ -318,12 +317,6 @@
 
   .fullcourt-native .titlebar-live {
     display: none;
-  }
-
-  .fullcourt-native .topnav-item {
-    padding-right: 7px;
-    padding-left: 7px;
-    font-size: 7.5px;
   }
 
   .fullcourt-native .league-page {
