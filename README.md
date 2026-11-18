@@ -10,9 +10,9 @@ Built with Electron, React, Vite, and Capacitor. Live game data comes from ESPN'
 
 Windows builds are published on the [GitHub Releases page](https://github.com/theclintoris/fullcourt/releases/latest).
 
-- **`FullCourt-Portable-1.3.0.exe`** — single-file portable build; no installation required.
-- **`FullCourt-1.3.0-win-x64.zip`** — extract the folder and run `FullCourt.exe`.
-- **`FullCourt-Setup-1.3.0.exe`** — standard Windows installer.
+- **`FullCourt-Portable-1.4.0.exe`** — single-file portable build; no installation required.
+- **`FullCourt-1.4.0-win-x64.zip`** — extract the folder and run `FullCourt.exe`.
+- **`FullCourt-Setup-1.4.0.exe`** — standard Windows installer.
 
 The builds are unsigned, so Windows SmartScreen may show a warning on first launch. Choose **More info → Run anyway**, or run `Unblock-File` on the downloaded file. A League Pass subscription is needed to watch games; the button opens the official NBA site.
 
@@ -36,6 +36,8 @@ The builds are unsigned, so Windows SmartScreen may show a warning on first laun
 - **Era Lab** — put two to four player-seasons side by side. Compare raw per-game production, per-100 possession rates, advanced metrics, and transparent era-adjusted scoring and efficiency indexes.
 
 Under **Records → Teams → Franchise records**, browse all 30 teams by current or former name. Each profile includes regular-season and playoff win–loss totals, title seasons, single-game and single-season records, streaks, and every completed season's results and per-game stats. The current season appears separately when ESPN standings are available.
+
+Under **Records → Player search**, look up more than 5,000 NBA and BAA players. Each profile has five views for regular-season game highs, playoff game highs, season highs, full playoff runs and career totals. The record book includes shooting makes, attempts and rates, traditional box-score stats, Game Score, effective field goal percentage, true shooting, and season PER and BPM.
 
 Advanced game metrics are derived locally. Era adjustments are experimental and clearly labeled; they are context, not a claim about who would win.
 
@@ -92,9 +94,9 @@ npm run dist        # both
 
 Artifacts are written to `release/`:
 
-- `FullCourt-Setup-1.3.0.exe`
-- `FullCourt-Portable-1.3.0.exe`
-- `FullCourt-1.3.0-win-x64.zip` — unpack-and-run folder build (most portable option)
+- `FullCourt-Setup-1.4.0.exe`
+- `FullCourt-Portable-1.4.0.exe`
+- `FullCourt-1.4.0-win-x64.zip` — unpack-and-run folder build (most portable option)
 
 The Windows release is unsigned, so Windows SmartScreen may warn on first launch.
 
@@ -132,6 +134,7 @@ Record book:
 - curated league-wide team records
 - a franchise archive through 2025–26, including BAA and ABA seasons where applicable. Results come from [Basketball Reference](https://www.basketball-reference.com/teams/) and [StatMuse](https://www.statmuse.com/nba/team/toronto-raptors-51/history), with per-game stats from the [Basketball Reference extract on Kaggle](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats). Rebuild the archive with [the franchise records script](scripts/build-franchise-records.py).
 - franchise game records and postseason win–loss totals from [FiveThirtyEight's NBA Elo archive](https://github.com/fivethirtyeight/data/tree/master/nba-elo), [Eoin Moore's game logs](https://www.kaggle.com/datasets/eoinamoore/historical-nba-data-and-player-box-scores), and ESPN schedules. The build verifies each regular-season game log against the franchise's season record.
+- offline player profiles through 16 November 2026, with completed playoff runs through 2025–26. The archive combines [Basketball Reference-derived historical box scores](https://www.kaggle.com/datasets/gonzalogigena/nba-all-time-stats), [season totals and advanced stats](https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats), [recent game logs](https://www.kaggle.com/datasets/eoinamoore/historical-nba-data-and-player-box-scores), and ESPN box scores. See [the player records build script](scripts/build-player-records.py).
 
 The renderer has no network access. HTML runs behind a strict CSP, `connect-src` is disabled, and all live requests pass through context-isolated preload IPC. Responses are cached in the main process with stale-cache fallback when a feed is unavailable. Basketball Reference rate limits are respected with a serial request queue. On Android, the same service bundle runs inside the app and routes requests through Capacitor's native HTTP bridge; no browser CORS permission is used.
 

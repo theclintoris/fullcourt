@@ -1,0 +1,256 @@
+.personal-layout {
+  display: grid;
+  grid-template-columns: clamp(210px, 24vw, 282px) minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+}
+
+.personal-directory {
+  position: sticky;
+  top: 12px;
+  padding: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.personal-directory .personal-player-search {
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+}
+
+.personal-player-search input {
+  font-size: 13px;
+}
+
+.personal-match-label {
+  margin: 12px 3px 6px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.personal-player-list {
+  display: grid;
+  gap: 3px;
+  max-height: clamp(180px, 55vh, 500px);
+  margin: 0;
+  padding: 3px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+}
+
+.personal-player-list button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-soft);
+  text-align: left;
+}
+
+.personal-player-list button:hover {
+  background: var(--panel-hover);
+}
+
+.personal-player-list button[aria-pressed='true'] {
+  border-color: var(--line-orange);
+  background: var(--orange-wash);
+  color: var(--text);
+}
+
+.personal-player-list strong,
+.personal-player-list small {
+  display: block;
+}
+
+.personal-player-list strong {
+  font-size: 13px;
+}
+
+.personal-player-list small,
+.personal-player-list svg {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.personal-player-list svg {
+  flex: none;
+}
+
+.personal-profile-header {
+  padding: clamp(16px, 3vw, 27px);
+  margin-bottom: 12px;
+  border: 1px solid var(--line-strong);
+  border-top: 3px solid var(--orange);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(110deg, var(--panel-raised), var(--panel) 70%, #392620);
+}
+
+.personal-profile-header h2 {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 0.96;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.personal-profile-header p {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.personal-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.personal-tabs button {
+  min-height: 37px;
+  padding: 6px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.personal-tabs button:hover {
+  background: var(--panel-hover);
+  color: var(--text);
+}
+
+.personal-tabs button[aria-selected='true'] {
+  border-color: var(--line-orange);
+  background: var(--orange-wash);
+  color: var(--orange-light);
+}
+
+.personal-table-wrap {
+  overflow: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.personal-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: var(--text-soft);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.personal-table :is(th, td) {
+  padding: 8px 13px;
+  text-align: left;
+}
+
+.personal-table th:first-child {
+  width: 32%;
+}
+
+.personal-table th:nth-child(2) {
+  width: 17%;
+}
+
+.personal-table thead {
+  background: var(--panel-raised);
+  color: var(--text-muted);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.personal-table tbody tr {
+  border-top: 1px solid var(--line);
+}
+
+.personal-table tbody th {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.personal-table .personal-value {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.personal-table .personal-context,
+.personal-qualifications {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.personal-table--career th:first-child {
+  width: 45%;
+}
+
+.personal-table--career th:nth-child(2) {
+  width: 28%;
+}
+
+.personal-table sup {
+  margin-left: 2px;
+  color: var(--orange-light);
+}
+
+.personal-qualifications {
+  margin-top: 10px;
+}
+
+@media (max-width: 760px) {
+  .personal-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .personal-directory {
+    position: static;
+  }
+
+  .personal-match-panel--collapsed {
+    display: none;
+  }
+
+  .personal-player-list {
+    max-height: 215px;
+  }
+
+  .personal-tabs button {
+    min-height: 34px;
+    padding-inline: 8px;
+    font-size: 11px;
+  }
+
+  .personal-table {
+    font-size: 11px;
+  }
+
+  .personal-table :is(th, td) {
+    padding: 7px;
+  }
+
+  .personal-table .personal-context {
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  .personal-table .personal-value {
+    font-size: 19px;
+  }
+}

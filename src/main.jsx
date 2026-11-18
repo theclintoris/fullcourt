@@ -13,6 +13,7 @@ import './styles/league-shell.css';
 import './styles/league-data.css';
 import './styles/league-records-era.css';
 import './styles/franchise-records.css';
+import './styles/personal-records.css';
 import './styles/league-responsive.css';
 import './styles/mobile.css';
 import App from './App.jsx';
