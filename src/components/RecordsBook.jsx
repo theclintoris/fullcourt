@@ -12,6 +12,7 @@ import { LeagueHeader, SourceNote } from './LeagueChrome.jsx';
 import { EmptyState, LoadingLabel } from './ui.jsx';
 
 const FranchiseRecords = lazy(() => import('./FranchiseRecords.jsx'));
+const PersonalRecords = lazy(() => import('./PersonalRecords.jsx'));
 
 const RECORD_SCOPES = [
   { id: 'singleGame', label: 'Single game' },
@@ -19,6 +20,7 @@ const RECORD_SCOPES = [
   { id: 'career', label: 'Career' },
   { id: 'playoffs', label: 'Playoffs' },
   { id: 'team', label: 'Teams' },
+  { id: 'players', label: 'Player search' },
 ];
 
 const PLAYOFF_TYPES = [
@@ -327,6 +329,8 @@ export default function RecordsBook() {
   const updated = formatUpdated(sync.lastUpdated || book.generatedAt);
   const archiveThrough = book.updatedThrough || book.snapshot || '2023-24';
   const isTeamScope = scope === 'team';
+  const isPlayerSearch = scope === 'players';
+  const isLeaderboard = !isTeamScope && !isPlayerSearch;
   const freshness = isLive
     ? `Auto-synced${updated ? ` ${updated}` : ''}`
     : `Bundled player archive · ${archiveThrough}`;
@@ -336,7 +340,7 @@ export default function RecordsBook() {
       <div className="records-masthead">
         <LeagueHeader
           title="NBA Record Book"
-          description="All-time player leaderboards, league records and complete franchise season histories."
+          description="All-time leaderboards, personal player records and complete franchise season histories."
         />
       </div>
 
@@ -354,7 +358,7 @@ export default function RecordsBook() {
             </button>
           ))}
         </div>
-        {!isTeamScope ? (
+        {isLeaderboard ? (
           <div className="records-header-actions">
             <span className="records-snapshot" aria-live="polite">{freshness}</span>
             {canSync ? (
@@ -372,7 +376,7 @@ export default function RecordsBook() {
         ) : null}
       </div>
 
-      {!isTeamScope && sync.error ? (
+      {isLeaderboard && sync.error ? (
         <p className="records-sync-message records-sync-message--error" role="status">
           {sync.error}
         </p>
@@ -396,6 +400,10 @@ export default function RecordsBook() {
             <LeagueTeamRecords records={book} search={search} setSearch={setSearch} />
           )}
         </>
+      ) : isPlayerSearch ? (
+        <Suspense fallback={<LoadingLabel>Loading player search…</LoadingLabel>}>
+          <PersonalRecords />
+        </Suspense>
       ) : (
         <>
           <PlayerRecords
