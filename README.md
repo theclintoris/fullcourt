@@ -10,9 +10,9 @@ Built with Electron, React, Vite, and Capacitor. Live game data comes from ESPN'
 
 Windows builds are published on the [GitHub Releases page](https://github.com/theclintoris/fullcourt/releases/latest).
 
-- **`FullCourt-Portable-1.2.1.exe`** — single-file portable build; no installation required.
-- **`FullCourt-1.2.1-win-x64.zip`** — extract the folder and run `FullCourt.exe`.
-- **`FullCourt-Setup-1.2.1.exe`** — standard Windows installer.
+- **`FullCourt-Portable-1.3.0.exe`** — single-file portable build; no installation required.
+- **`FullCourt-1.3.0-win-x64.zip`** — extract the folder and run `FullCourt.exe`.
+- **`FullCourt-Setup-1.3.0.exe`** — standard Windows installer.
 
 The builds are unsigned, so Windows SmartScreen may show a warning on first launch. Choose **More info → Run anyway**, or run `Unblock-File` on the downloaded file. A League Pass subscription is needed to watch games; the button opens the official NBA site.
 
@@ -92,9 +92,9 @@ npm run dist        # both
 
 Artifacts are written to `release/`:
 
-- `FullCourt-Setup-1.2.1.exe`
-- `FullCourt-Portable-1.2.1.exe`
-- `FullCourt-1.2.1-win-x64.zip` — unpack-and-run folder build (most portable option)
+- `FullCourt-Setup-1.3.0.exe`
+- `FullCourt-Portable-1.3.0.exe`
+- `FullCourt-1.3.0-win-x64.zip` — unpack-and-run folder build (most portable option)
 
 The Windows release is unsigned, so Windows SmartScreen may warn on first launch.
 
